@@ -2,23 +2,31 @@ import { useState } from 'react'
 import styled from 'styled-components';
 import logo from './assets/logo.png';
 import Card from './Cards';
+import deck from './Questions';
 
 export default function App() {
+  const [progress,setProgress] = useState(0);
 
   return (
     <APP>
-      <LOGO>
-        <img src={logo}/>
-        <>ZapRecall</>
-      </LOGO>
-      <QUESTIONS>
-        <Card index='1' question='qual o seu nome?' answer='Jean'/>
-      </QUESTIONS>
+      <CONTENT>
+        <LOGO>
+          <img src={logo}/>
+          <>ZapRecall</>
+        </LOGO>
+        <QUESTIONS>
+          {deck.map((e,i)=><Card key={i} index={i} question={e.question} answer={e.answer} func={finish}/>)}
+        </QUESTIONS>
+      </CONTENT>
       <BOTTOM>
-        0/4 CONCLUÍDOS
+        {progress}/{deck.length} CONCLUÍDOS
       </BOTTOM>
     </APP>
   )
+
+  function finish(){
+    setProgress(progress+1);
+  }
 }
 
 
@@ -26,6 +34,10 @@ const APP = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #FB6B6B;
+`;
+
+const CONTENT = styled.div`
+  margin-bottom: 70px;
 `;
 
 const LOGO = styled.div`
