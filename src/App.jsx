@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components';
 import logo from './assets/logo.png';
+import Card from './Cards';
 
 export default function App() {
 
@@ -11,7 +12,7 @@ export default function App() {
         <>ZapRecall</>
       </LOGO>
       <QUESTIONS>
-
+        <Card index='1' question='qual o seu nome?' answer='Jean'/>
       </QUESTIONS>
       <BOTTOM>
         0/4 CONCLUÍDOS
@@ -43,7 +44,11 @@ const LOGO = styled.div`
   }
 `;
 
-const QUESTIONS = styled.div``;
+const QUESTIONS = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const BOTTOM = styled.div`
   position: fixed;
