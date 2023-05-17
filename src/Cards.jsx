@@ -15,13 +15,13 @@ export default function Card(props){
     const [complete,setComplete] = useState(status)
 
     return(
-        <CARD $r={bstate==""||bstate==virar}>
-            <P $c={complete} $n={bstate==no} $a={bstate==almost} $y={bstate==yes}>{texto}</P>
+        <CARD $r={bstate==""||bstate==virar} data-test='flashcard'>
+            <P $c={complete} $n={bstate==no} $a={bstate==almost} $y={bstate==yes} $p={bstate!=""&&bstate!=virar} data-test="flashcard-text">{texto}</P>
             <BUTTONS $e={bstate}>
-                <RBUTTON $v={!bstate} onClick={()=>Result("no")}>Não lembrei</RBUTTON>
-                <LBUTTON $v={!bstate} onClick={()=>Result("almost")}>Quase não lembrei</LBUTTON>
-                <GBUTTON $v={!bstate} onClick={()=>Result("yes")}>Zap!</GBUTTON>
-                <IMAGE src={bstate} disabled={bstate!=play||bstate!=virar} onClick={()=>(bstate==play||bstate==virar)?Play():""} $v={bstate}/>
+                <RBUTTON $v={!bstate} onClick={()=>Result("no")} data-test="no-btn">Não lembrei</RBUTTON>
+                <LBUTTON $v={!bstate} onClick={()=>Result("almost")} data-test="partial-btn">Quase não lembrei</LBUTTON>
+                <GBUTTON $v={!bstate} onClick={()=>Result("yes")} data-test="zap-btn">Zap!</GBUTTON>
+                <IMAGE src={bstate} disabled={bstate!=play||bstate!=virar} onClick={()=>(bstate==play||bstate==virar)?Play():""} $v={bstate} data-test={bstate==play?"play-btn":(bstate==virar?"turn-btn":(bstate==no?"no-icon":(bstate==yes?"zap-icon":(bstate==almost?"partial-icon":""))))}/>
             </BUTTONS>
         </CARD>
     );
@@ -56,20 +56,27 @@ export default function Card(props){
 const CARD = styled.div`
     display: flex;
     flex-direction: ${props => props.$r?"column":"row"};
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: ${props => props.$r?"flex-start":"center"};
     width: 80%;
     min-height: 45px;
     padding: 10px 20px;
     margin: 10px 0;
+    overflow: overlay;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     background-color: white;
 `;
 
-const P = styled.p`
+const P = styled.div`
     width:100%;
-    height: auto;
+    height: 100%;
+    overflow: clip;
+    flex-wrap: wrap;
+    font-family: Recursive;
+    margin: 5px 0;
+    font-weight: ${props=>props.$p?'700':'400'};
+    font-size: ${props=>props.$p?'16px':'18px'};
     color: ${props => {
         if(props.$n){return "red"}
         else if(props.$a){return "orange"}
@@ -81,6 +88,7 @@ const P = styled.p`
 
 const BUTTONS = styled.div`
     width: 100%;
+    height: 30px;
     display: flex;
     flex-direction: row;
     justify-content: ${props => props.$e?"flex-end":"space-between"};
@@ -89,9 +97,14 @@ const BUTTONS = styled.div`
 
 const RBUTTON = styled.button`
     width: 30%;
+    height: 100%;
     border-radius: 5px;
     border: none;
     background-color: #FF3030;
+    color: white;
+    font-family: Recursive;
+    font-weight: 400;
+    font-size: 12px;
     display: ${props => props.$v?"block":"none"};
 `;
 

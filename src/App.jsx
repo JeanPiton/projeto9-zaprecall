@@ -18,7 +18,7 @@ export default function App() {
           {deck.map((e,i)=><Card key={i} index={i} question={e.question} answer={e.answer} func={finish}/>)}
         </QUESTIONS>
       </CONTENT>
-      <BOTTOM>
+      <BOTTOM data-test='footer'>
         {progress}/{deck.length} CONCLUÍDOS
       </BOTTOM>
     </APP>
