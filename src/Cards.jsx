@@ -65,7 +65,7 @@ const CARD = styled.div`
     overflow: overlay;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
-    background-color: white;
+    background-color: ${props => props.$r?"#FFFFD4":"white"};
 `;
 
 const P = styled.div`
