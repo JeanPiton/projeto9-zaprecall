@@ -27,19 +27,23 @@ export default function Card(props){
     );
 
     function Result(res){
+        let state;
         console.log(res);
         if(res=="no"){
             setBstate(no);
+            state=no;
         }
         if(res=="almost"){
             setBstate(almost);
+            state=almost;
         }
         if(res=="yes"){
             setBstate(yes);
+            state=yes;
         }
         setTexto(textoInicial);
         setComplete(true);
-        update();
+        update(state);
     }
 
     function Play(){

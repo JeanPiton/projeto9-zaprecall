@@ -46,6 +46,7 @@ const GlobalStyle = createGlobalStyle`
     }
     *{
         overflow: auto;
+        box-sizing: border-box;
     }
 `;
 export default GlobalStyle;
