@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components';
 import logo from './assets/logo.png';
 import Card from './Cards';
+import Welcome from './Welcome';
 import deck from './Questions';
 import party from './assets/party.png';
 import sad from './assets/sad.png';
@@ -17,6 +18,7 @@ export default function App() {
 
   return (
     <APP>
+      <Welcome />
       <CONTENT>
         <LOGO>
           <img src={logo}/>
