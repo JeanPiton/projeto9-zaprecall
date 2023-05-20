@@ -37,6 +37,7 @@ const IniScreen = styled.div`
     font-family: Righteous;
     font-weight: 400;
     font-size: 36px;
+    color: white;
 
     img{
         width: 136px;
